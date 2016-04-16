@@ -26,9 +26,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Compile Include="Script.ps1" />
+    <Content Include="icon.png" />
+    <Content Include="task.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Upload.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

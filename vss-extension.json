@@ -1,0 +1,82 @@
+{
+	"manifestVersion": 1,
+	"id": "vsts-kudu-tasks-pre",
+	"name": "VSTS Kudu Tasks",
+	"version": "0.0.1",
+	"publisher": "sergiibomko",
+	"public": false,
+	"galleryFlags": [
+		"Private",
+		"Preview"
+	],
+	"targets": [
+		{
+			"id": "Microsoft.VisualStudio.Services"
+		}
+	],
+	"scope": [
+		"vso.build"
+	],
+	"description": "Release Management extension that enable you to upload packages to Kudu",
+	"categories": [
+		"Build and release"
+	],
+	"tags": [
+		"Kudu",
+		"Upload"
+	],
+	"screenshots": [
+		{
+			"path": "Extension/Screenshots/Screenshot1.png"
+		}
+	],
+	"content": {
+		"details": {
+			"path": "README.md"
+		},
+		"license": {
+			"path": "LICENSE"
+		}
+	},
+	"links": {
+		"getstarted": {
+			"uri": "https://github.com/aquiladev/vsts-kudu-tasks"
+		},
+		"repository": {
+			"uri": "https://github.com/aquiladev/vsts-kudu-tasks"
+		},
+		"issues": {
+			"uri": "https://github.com/aquiladev/vsts-kudu-tasks/issues"
+		}
+	},
+	"branding": {
+		"color": "rgb(27, 27, 27)",
+		"theme": "dark"
+	},
+	"icons": {
+		"default": "Extension/icon.png"
+	},
+	"files": [
+		{
+			"path": "VSTS.Kudu.Tasks.Upload/Upload.ps1"
+		},
+		{
+			"path": "VSTS.Kudu.Tasks.Upload/task.json"
+		},
+		{
+			"path": "VSTS.Kudu.Tasks.Upload/icon.png"
+		}
+	],
+	"contributions": [
+		{
+			"id": "VSTS.Kudu.Tasks.Upload",
+			"type": "ms.vss-distributed-task.task",
+			"targets": [
+				"ms.vss-distributed-task.tasks"
+			],
+			"properties": {
+				"name": "VSTS.Kudu.Tasks.Upload"
+			}
+		}
+	]
+}
