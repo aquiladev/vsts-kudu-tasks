@@ -27,7 +27,7 @@
 	],
 	"screenshots": [
 		{
-			"path": "Extension/Screenshots/Screenshot1.png"
+			"path": "Extension/Screenshots/project-kudu.png"
 		}
 	],
 	"content": {
@@ -35,7 +35,8 @@
 			"path": "README.md"
 		},
 		"license": {
-			"path": "LICENSE"
+			"path": "LICENSE",
+			"contentType": "text/plain"
 		}
 	},
 	"links": {

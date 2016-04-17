@@ -1,12 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.Kudu.Tasks.Upload", "VSTS.Kudu.Tasks.Upload\VSTS.Kudu.Tasks.Upload.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8E0925C-7D52-4996-AEC0-AEDA4F82BDB5}"
 	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
+		CreateExtension.ps1 = CreateExtension.ps1
 		LICENSE = LICENSE
 		README.md = README.md
 		vss-extension.json = vss-extension.json

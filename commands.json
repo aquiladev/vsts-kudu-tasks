@@ -1,0 +1,10 @@
+{
+  "commands": {
+    "CreateExtension": {
+      "fileName": "powershell.exe",
+      "workingDirectory": ".",
+      "arguments": "-ExecutionPolicy Bypass -File CreateExtension.ps1"
+    }
+  }
+, "-vs-binding":{"AfterBuild":["CreateExtension"]}
+}
