@@ -62,7 +62,8 @@
 			"label": "Destination Path",
 			"defaultValue": "/site/wwwroot",
 			"helpMarkDown": "Destination path in Kudu.",
-			"required": true
+			"required": true,
+			"groupName": "advanced"
 		}
 	],
 	"dataSourceBindings": [
@@ -80,7 +81,7 @@
 		"PowerShell": {
 			"target": "$(currentDirectory)\\Upload.ps1",
 			"argumentFormat": "",
-			"workingDirectory": "$(WorkingFolder)"
+			"workingDirectory": "$(currentDirectory)"
 		}
 	}
 }

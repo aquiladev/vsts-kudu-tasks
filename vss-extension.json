@@ -6,7 +6,6 @@
 	"publisher": "sergiibomko",
 	"public": false,
 	"galleryFlags": [
-		"Private",
 		"Preview"
 	],
 	"targets": [
@@ -23,7 +22,7 @@
 	],
 	"tags": [
 		"Kudu",
-		"Upload"
+		"Tasks"
 	],
 	"screenshots": [
 		{
@@ -51,8 +50,8 @@
 		}
 	},
 	"branding": {
-		"color": "rgb(27, 27, 27)",
-		"theme": "dark"
+		"color": "#000000",
+		"theme": "light"
 	},
 	"icons": {
 		"default": "Extension/icon.png"
