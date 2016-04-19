@@ -10,9 +10,10 @@ This extension includes the following tasks:
 ## Kudu upload task
 With this task you can upload zip package into Kudu
 
-### Using
-* Add task into your build or release definition
+### Get Started
+* First of all you need to define Azure Classic service endpoint. [More Information](https://msdn.microsoft.com/library/vs/alm/release/author-release-definition/understanding-tasks#Serviceendpoints)
+* Then you need to add task into your build or release definition.
 ![add upload task](https://raw.githubusercontent.com/aquiladev/vsts-kudu-tasks/master/Extension/Images/add_upload_task.png)
 
-* Fill settings for the task
+* And fill settings for the task
 ![settings](https://raw.githubusercontent.com/aquiladev/vsts-kudu-tasks/master/Extension/Images/upload_task_settings.png)
