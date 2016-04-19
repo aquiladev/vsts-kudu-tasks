@@ -2,7 +2,7 @@
 	"manifestVersion": 1,
 	"id": "vsts-kudu-tasks",
 	"name": "VSTS Kudu Tasks",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"publisher": "sergiibomko",
 	"public": false,
 	"galleryFlags": [
@@ -27,11 +27,6 @@
 		"upload",
 		"deployment",
 		"tasks"
-	],
-	"screenshots": [
-		{
-			"path": "Extension/Screenshots/project-kudu.png"
-		}
 	],
 	"content": {
 		"details": {
