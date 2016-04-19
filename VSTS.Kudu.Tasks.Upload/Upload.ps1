@@ -1,30 +1,93 @@
 [CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
-    [String] [Parameter(Mandatory = $true)]
-    $ConnectedServiceName,
+	[String] [Parameter(Mandatory = $true)]
+	$ConnectedServiceName,
 
-    [String] [Parameter(Mandatory = $true)]
-    $WebSiteName,
+	[String] [Parameter(Mandatory = $true)]
+	$WebsiteName,
 
-    [String] [Parameter(Mandatory = $false)]
-    $Slot,
+	[String] [Parameter(Mandatory = $false)]
+	$WebsiteLocation,
 
-    [String] [Parameter(Mandatory = $true)]
-    $Package,
+	[String] [Parameter(Mandatory = $false)]
+	$Slot,
 
-    [String] [Parameter(Mandatory = $true)]
-    $DestinationPath
+	[String] [Parameter(Mandatory = $true)]
+	$Package,
+
+	[String] [Parameter(Mandatory = $true)]
+	$DestinationPath
 )
+
+Function Get-AzureWebsiteName {
+	param(
+		[String] [Parameter(Mandatory = $true)] $Name,
+		[String] $Slot
+	)
+
+	if([string]::IsNullOrWhiteSpace($Slot)) {
+		return $Name
+	}
+	return "$Name($Slot)"
+}
+
+Function Get-KuduWebsiteName {
+	param(
+		[String] [Parameter(Mandatory = $true)] $Name,
+		[String] $Slot
+	)
+
+	if([string]::IsNullOrWhiteSpace($Slot)) {
+		return $Name
+	}
+	return "$Name-$Slot"
+}
+
+Function JoinParts {
+	param (
+		[String[]] $Parts,
+		[String] $Separator = '/'
+	)
+
+	$search = '(?<!:)' + [regex]::Escape($Separator) + '+' #Replace multiples except in front of a colon for URLs.
+	$replace = $Separator
+	($Parts | ? {$_ -and $_.Trim().Length}) -join $Separator -replace $search, $replace
+}
 
 Write-Verbose "Entering script Upload.ps1"
 
 Write-Host "ConnectedServiceName= $ConnectedServiceName"
-Write-Host "WebSiteName= $WebSiteName"
+Write-Host "WebSiteName= $WebsiteName"
 Write-Host "Slot= $Slot"
 Write-Host "Package= $Package"
 Write-Host "DestinationPath= $DestinationPath"
 
-Write-Host "packageFile= Find-Files -SearchPattern $Package"
+Write-Host "PackageFile= Find-Files -SearchPattern $Package"
 $packageFile = Find-Files -SearchPattern $Package
-Write-Host "packageFile= $packageFile"
+Write-Host "PackageFile= $packageFile"
+
+$azureWebsiteName = Get-AzureWebsiteName -Name $WebsiteName -Slot $Slot
+$website = Get-AzureWebsite -Name $azureWebsiteName
+
+if($website) {
+	$timeout = 600
+
+	$username = $website.PublishingUsername
+	Write-Host "UserName= $username"
+	
+	$password = $website.PublishingPassword
+	Write-Host "Password= $password"
+
+	$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
+
+	$kuduWebsiteName = Get-KuduWebsiteName -Name $WebsiteName -Slot $Slot
+	$baseUrl = [string]::Format("https://{0}.scm.azurewebsites.net", $kuduWebsiteName)
+	$apiUrl = JoinParts ($baseUrl, "api/zip", $DestinationPath) '/'
+
+	Write-Host "KuduApiUrl= $apiUrl"
+
+	Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
+} else {
+	Write-Warning "Cannot get website, deployment status is not updated"
+}

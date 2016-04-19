@@ -1,6 +1,6 @@
 {
 	"manifestVersion": 1,
-	"id": "vsts-kudu-tasks-pre",
+	"id": "vsts-kudu-tasks",
 	"name": "VSTS Kudu Tasks",
 	"version": "0.0.1",
 	"publisher": "sergiibomko",
@@ -16,7 +16,7 @@
 	"scope": [
 		"vso.build"
 	],
-	"description": "Release Management extension that enable you to upload packages to Kudu",
+	"description": "Release Management extension that enable you to integrate with Kudu",
 	"categories": [
 		"Build and release"
 	],
@@ -50,7 +50,7 @@
 		}
 	},
 	"branding": {
-		"color": "#000000",
+		"color": "#eff1f3",
 		"theme": "light"
 	},
 	"icons": {

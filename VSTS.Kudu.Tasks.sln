@@ -20,6 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{4A22532D-6354-4093-A17F-FD54E2E98A7D}"
+	ProjectSection(SolutionItems) = preProject
+		Extension\Screenshots\project-kudu.png = Extension\Screenshots\project-kudu.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
