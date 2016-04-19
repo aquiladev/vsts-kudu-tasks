@@ -12,4 +12,7 @@ With this task you can upload zip package into Kudu
 
 ### Using
 * Add task into your build or release definition
+![add upload task](https://raw.githubusercontent.com/aquiladev/vsts-kudu-tasks/master/Extension/Images/add_upload_task.png)
+
 * Fill settings for the task
+![settings](https://raw.githubusercontent.com/aquiladev/vsts-kudu-tasks/master/Extension/Images/upload_task_settings.png)
