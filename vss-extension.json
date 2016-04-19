@@ -2,7 +2,7 @@
 	"manifestVersion": 1,
 	"id": "vsts-kudu-tasks",
 	"name": "VSTS Kudu Tasks",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "sergiibomko",
 	"public": false,
 	"galleryFlags": [
@@ -16,13 +16,17 @@
 	"scope": [
 		"vso.build"
 	],
-	"description": "Release Management extension that enable you to integrate with Kudu",
+	"description": "Extension that enable you to integrate with Kudu",
 	"categories": [
 		"Build and release"
 	],
 	"tags": [
-		"Kudu",
-		"Tasks"
+		"kudu",
+		"azure",
+		"publish",
+		"upload",
+		"deployment",
+		"tasks"
 	],
 	"screenshots": [
 		{
@@ -42,10 +46,7 @@
 		"getstarted": {
 			"uri": "https://github.com/aquiladev/vsts-kudu-tasks"
 		},
-		"repository": {
-			"uri": "https://github.com/aquiladev/vsts-kudu-tasks"
-		},
-		"issues": {
+		"support": {
 			"uri": "https://github.com/aquiladev/vsts-kudu-tasks/issues"
 		}
 	},
@@ -54,7 +55,7 @@
 		"theme": "light"
 	},
 	"icons": {
-		"default": "Extension/icon.png"
+		"default": "Extension/icon.svg"
 	},
 	"files": [
 		{
@@ -65,6 +66,9 @@
 		},
 		{
 			"path": "VSTS.Kudu.Tasks.Upload/icon.png"
+		},
+		{
+			"path": "VSTS.Kudu.Tasks.Upload/icon.svg"
 		}
 	],
 	"contributions": [
