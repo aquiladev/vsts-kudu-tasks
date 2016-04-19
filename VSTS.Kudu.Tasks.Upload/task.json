@@ -3,14 +3,14 @@
 	"name": "Kudu.Upload",
 	"friendlyName": "Kudu Tasks Upload",
 	"description": "Uploads package into Kudu.",
-	"helpMarkDown": "Version: 0.0.2",
+	"helpMarkDown": "[More Information](https://github.com/aquiladev/vsts-kudu-tasks)",
 	"category": "Deploy",
 	"visibility": [ "Build", "Release" ],
 	"author": "Sergii Bomko",
 	"version": {
 		"Major": 0,
-		"Minor": 0,
-		"Patch": 1
+		"Minor": 1,
+		"Patch": 0
 	},
 	"demands": [ "azureps" ],
 	"minimumAgentVersion": "1.95.0",

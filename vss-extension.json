@@ -4,10 +4,7 @@
 	"name": "VSTS Kudu Tasks",
 	"version": "0.1.0",
 	"publisher": "sergiibomko",
-	"public": false,
-	"galleryFlags": [
-		"Preview"
-	],
+	"public": true,
 	"targets": [
 		{
 			"id": "Microsoft.VisualStudio.Services"
