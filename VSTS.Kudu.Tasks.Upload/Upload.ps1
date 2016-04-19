@@ -74,11 +74,7 @@ if($website) {
 	$timeout = 600
 
 	$username = $website.PublishingUsername
-	Write-Host "UserName= $username"
-	
 	$password = $website.PublishingPassword
-	Write-Host "Password= $password"
-
 	$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
 
 	$kuduWebsiteName = Get-KuduWebsiteName -Name $WebsiteName -Slot $Slot
@@ -88,6 +84,20 @@ if($website) {
 	Write-Host "KuduApiUrl= $apiUrl"
 
 	Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
+
+	try {
+		Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
+	} catch {
+		Write-Host -ForegroundColor:Red "StatusCode:" $_.Exception.Response.StatusCode.value__
+		Write-Host -ForegroundColor:Red "StatusDescription:" $_.Exception.Response.StatusDescription
+
+		$result = $_.Exception.Response.GetResponseStream()
+		$reader = New-Object System.IO.StreamReader($result)
+		$reader.BaseStream.Position = 0
+		$responseBody = $reader.ReadToEnd();
+
+		Write-Host -ForegroundColor:Red $responseBody
+	}
 } else {
 	Write-Warning "Cannot get website, deployment status is not updated"
 }
