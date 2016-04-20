@@ -96,7 +96,7 @@ if($website) {
 		$streamReader.DiscardBufferedData()
 		$responseBody = $streamReader.ReadToEnd()
 		$streamReader.Close()
-		Write-Warning $responseBody
+		Write-Error $responseBody
 	}
 } else {
 	Write-Warning "Cannot get website, deployment status is not updated"

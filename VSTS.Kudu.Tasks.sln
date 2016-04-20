@@ -17,11 +17,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{11E80543-3294-4A10-9FE0-093740F997DC}"
 	ProjectSection(SolutionItems) = preProject
 		Extension\icon.png = Extension\icon.png
+		Extension\icon.svg = Extension\icon.svg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{4A22532D-6354-4093-A17F-FD54E2E98A7D}"
 	ProjectSection(SolutionItems) = preProject
 		Extension\Screenshots\project-kudu.png = Extension\Screenshots\project-kudu.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{A7D94E10-F701-4255-B0A9-91A13FA0D0D1}"
+	ProjectSection(SolutionItems) = preProject
+		Extension\Images\add_upload_task.png = Extension\Images\add_upload_task.png
+		Extension\Images\upload_task_settings.png = Extension\Images\upload_task_settings.png
 	EndProjectSection
 EndProject
 Global
@@ -40,5 +47,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4A22532D-6354-4093-A17F-FD54E2E98A7D} = {11E80543-3294-4A10-9FE0-093740F997DC}
+		{A7D94E10-F701-4255-B0A9-91A13FA0D0D1} = {11E80543-3294-4A10-9FE0-093740F997DC}
 	EndGlobalSection
 EndGlobal
