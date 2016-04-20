@@ -88,16 +88,18 @@ if($website) {
 	try {
 		Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
 	} catch {
-		Write-Host -ForegroundColor:Red "StatusCode:" $_.Exception.Response.StatusCode.value__
-		Write-Host -ForegroundColor:Red "StatusDescription:" $_.Exception.Response.StatusDescription
-
-		$result = $_.Exception.Response.GetResponseStream()
-		$reader = New-Object System.IO.StreamReader($result)
-		$reader.BaseStream.Position = 0
-		$responseBody = $reader.ReadToEnd();
-
-		Write-Host -ForegroundColor:Red $responseBody
+		Write-Verbose $_.Exception.ToString()
+		$response = $_.Exception.Response
+		$responseStream =  $response.GetResponseStream()
+		$streamReader = New-Object System.IO.StreamReader($responseStream)
+		$streamReader.BaseStream.Position = 0
+		$streamReader.DiscardBufferedData()
+		$responseBody = $streamReader.ReadToEnd()
+		$streamReader.Close()
+		Write-Warning $responseBody
 	}
 } else {
 	Write-Warning "Cannot get website, deployment status is not updated"
 }
+
+Write-Verbose "Leaving script Upload.ps1"
