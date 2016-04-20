@@ -58,7 +58,7 @@ Function JoinParts {
 	($Parts | ? {$_ -and $_.Trim().Length}) -join $Separator -replace $search, $replace
 }
 
-[bool]$StopWebsite = Convert-String $StopWebsite Boolean
+[bool]$StopWebsite = [System.Convert]::ToBoolean($StopWebsite)
 
 Write-Verbose "Entering script Upload.ps1"
 
@@ -91,6 +91,7 @@ if($website) {
 	
 	if($StopWebsite) {
 		Stop-AzureWebsite -Name $azureWebsiteName
+		Write-Host "Stopped website $azureWebsiteName"
 	}
 
 	try {
@@ -108,6 +109,7 @@ if($website) {
 	} finally {
 		if($StopWebsite) {
 			Start-AzureWebsite -Name $azureWebsiteName
+			Write-Host "Started website $azureWebsiteName"
 		}
 	}
 } else {
