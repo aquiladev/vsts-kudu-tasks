@@ -17,7 +17,10 @@ param
 	$Package,
 
 	[String] [Parameter(Mandatory = $true)]
-	$DestinationPath
+	$DestinationPath,
+
+	[String] [Parameter(Mandatory = $false)]
+	$StopWebsite
 )
 
 Function Get-AzureWebsiteName {
@@ -55,6 +58,8 @@ Function JoinParts {
 	($Parts | ? {$_ -and $_.Trim().Length}) -join $Separator -replace $search, $replace
 }
 
+[bool]$StopWebsite = Convert-String $StopWebsite Boolean
+
 Write-Verbose "Entering script Upload.ps1"
 
 Write-Host "ConnectedServiceName= $ConnectedServiceName"
@@ -62,6 +67,7 @@ Write-Host "WebSiteName= $WebsiteName"
 Write-Host "Slot= $Slot"
 Write-Host "Package= $Package"
 Write-Host "DestinationPath= $DestinationPath"
+Write-Host "StopWebsite= $StopWebsite"
 
 Write-Host "PackageFile= Find-Files -SearchPattern $Package"
 $packageFile = Find-Files -SearchPattern $Package
@@ -82,8 +88,10 @@ if($website) {
 	$apiUrl = JoinParts ($baseUrl, "api/zip", $DestinationPath) '/'
 
 	Write-Host "KuduApiUrl= $apiUrl"
-
-	Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
+	
+	if($StopWebsite) {
+		Stop-AzureWebsite -Name $azureWebsiteName
+	}
 
 	try {
 		Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $packageFile -ContentType "multipart/form-data" -TimeoutSec $timeout
@@ -97,6 +105,10 @@ if($website) {
 		$responseBody = $streamReader.ReadToEnd()
 		$streamReader.Close()
 		Write-Error $responseBody
+	} finally {
+		if($StopWebsite) {
+			Start-AzureWebsite -Name $azureWebsiteName
+		}
 	}
 } else {
 	Write-Warning "Cannot get website, deployment status is not updated"

@@ -9,8 +9,8 @@
 	"author": "Sergii Bomko",
 	"version": {
 		"Major": 0,
-		"Minor": 1,
-		"Patch": 3
+		"Minor": 2,
+		"Patch": 0
 	},
 	"demands": [ "azureps" ],
 	"minimumAgentVersion": "1.95.0",
@@ -74,6 +74,15 @@
 			"defaultValue": "/site/wwwroot",
 			"helpMarkDown": "Destination path in Kudu.",
 			"required": true,
+			"groupName": "advanced"
+		},
+		{
+			"name": "StopWebsite",
+			"type": "boolean",
+			"label": "Stop Web App",
+			"defaultValue": "false",
+			"helpMarkDown": "By enabling this, Web App stops before upload and starts after upload.",
+			"required": false,
 			"groupName": "advanced"
 		}
 	],
