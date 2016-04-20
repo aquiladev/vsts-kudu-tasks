@@ -28,11 +28,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="icon.png" />
+    <Content Include="icon.svg" />
     <Content Include="task.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="icon.svg" />
-    <Compile Include="Upload.ps1" />
+    <Content Include="Upload.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

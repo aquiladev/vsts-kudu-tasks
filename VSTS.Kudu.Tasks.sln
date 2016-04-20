@@ -7,7 +7,6 @@ Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.Kudu.Tasks.Upload", "V
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8E0925C-7D52-4996-AEC0-AEDA4F82BDB5}"
 	ProjectSection(SolutionItems) = preProject
-		commands.json = commands.json
 		CreateExtension.ps1 = CreateExtension.ps1
 		LICENSE = LICENSE
 		README.md = README.md
@@ -18,11 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{
 	ProjectSection(SolutionItems) = preProject
 		Extension\icon.png = Extension\icon.png
 		Extension\icon.svg = Extension\icon.svg
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{4A22532D-6354-4093-A17F-FD54E2E98A7D}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\Screenshots\project-kudu.png = Extension\Screenshots\project-kudu.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{A7D94E10-F701-4255-B0A9-91A13FA0D0D1}"
@@ -46,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4A22532D-6354-4093-A17F-FD54E2E98A7D} = {11E80543-3294-4A10-9FE0-093740F997DC}
 		{A7D94E10-F701-4255-B0A9-91A13FA0D0D1} = {11E80543-3294-4A10-9FE0-093740F997DC}
 	EndGlobalSection
 EndGlobal
