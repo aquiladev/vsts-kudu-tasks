@@ -7,7 +7,6 @@ Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VSTS.Kudu.Tasks.Upload", "V
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8E0925C-7D52-4996-AEC0-AEDA4F82BDB5}"
 	ProjectSection(SolutionItems) = preProject
-		CreateExtension.ps1 = CreateExtension.ps1
 		LICENSE = LICENSE
 		README.md = README.md
 		vss-extension.json = vss-extension.json
