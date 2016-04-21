@@ -23,18 +23,6 @@ param
 	$StopWebsite
 )
 
-Function Get-AzureWebsiteName {
-	param(
-		[String] [Parameter(Mandatory = $true)] $Name,
-		[String] $Slot
-	)
-
-	if([string]::IsNullOrWhiteSpace($Slot)) {
-		return $Name
-	}
-	return "$Name($Slot)"
-}
-
 Function Get-KuduWebsiteName {
 	param(
 		[String] [Parameter(Mandatory = $true)] $Name,
@@ -58,6 +46,22 @@ Function JoinParts {
 	($Parts | ? {$_ -and $_.Trim().Length}) -join $Separator -replace $search, $replace
 }
 
+function Get-SingleFile($files, $pattern)
+{
+	if ($files -is [system.array])
+	{
+		throw "Found more than one file to deploy. There can be only one."
+	}
+	else
+	{
+		if (!$files)
+		{
+			throw "No files were found to deploy."
+		}
+		return $files
+	}
+}
+
 [bool]$StopWebsite = [System.Convert]::ToBoolean($StopWebsite)
 
 Write-Verbose "Entering script Upload.ps1"
@@ -73,8 +77,19 @@ Write-Host "PackageFile= Find-Files -SearchPattern $Package"
 $packageFile = Find-Files -SearchPattern $Package
 Write-Host "PackageFile= $packageFile"
 
-$azureWebsiteName = Get-AzureWebsiteName -Name $WebsiteName -Slot $Slot
-$website = Get-AzureWebsite -Name $azureWebsiteName
+$packageFile = Get-SingleFile $packageFile $Package
+
+$extraParameters = @{ }
+if ($Slot) { $extraParameters['Slot'] = $Slot }
+
+$azureWebSiteError = $null
+
+Write-Host "Get-AzureWebSite -Name $WebsiteName -ErrorAction SilentlyContinue -ErrorVariable azureWebSiteError $(if ($Slot) { "-Slot $Slot" })"  
+$website = Get-AzureWebSite -Name $WebsiteName -ErrorAction SilentlyContinue -ErrorVariable azureWebSiteError @extraParameters
+
+if($azureWebSiteError) {
+	$azureWebSiteError | ForEach-Object { Write-Warning $_.Exception.ToString() }
+}
 
 if($website) {
 	$timeout = 600
@@ -90,8 +105,14 @@ if($website) {
 	Write-Host "KuduApiUrl= $apiUrl"
 	
 	if($StopWebsite) {
-		Stop-AzureWebsite -Name $azureWebsiteName
-		Write-Host "Stopped website $azureWebsiteName"
+		$stopAzureWebSiteError = $null
+		Stop-AzureWebsite -Name $WebsiteName -ErrorAction SilentlyContinue -ErrorVariable stopAzureWebSiteError @extraParameters
+		
+		if($stopAzureWebSiteError) {
+			$stopAzureWebSiteError | ForEach-Object { Write-Warning $_.Exception.ToString() }
+		}
+
+		Write-Host "Stopped website $WebsiteName $(if ($Slot) { "-Slot $Slot" })"
 	}
 
 	try {
@@ -108,12 +129,18 @@ if($website) {
 		Write-Error $responseBody
 	} finally {
 		if($StopWebsite) {
-			Start-AzureWebsite -Name $azureWebsiteName
-			Write-Host "Started website $azureWebsiteName"
+			$startAzureWebSiteError = $null
+			Start-AzureWebsite -Name $WebsiteName -ErrorAction SilentlyContinue -ErrorVariable startAzureWebSiteError @extraParameters
+
+			if($startAzureWebSiteError) {
+				$startAzureWebSiteError | ForEach-Object { Write-Warning $_.Exception.ToString() }
+			}
+
+			Write-Host "Started website $WebsiteName $(if ($Slot) { "-Slot $Slot" })"
 		}
 	}
 } else {
-	Write-Warning "Cannot get website, deployment status is not updated"
+	Write-Warning "Cannot get website."
 }
 
 Write-Verbose "Leaving script Upload.ps1"

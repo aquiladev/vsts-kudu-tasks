@@ -2,7 +2,7 @@
 	"manifestVersion": 1,
 	"id": "vsts-kudu-tasks",
 	"name": "VSTS Kudu Tasks",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"publisher": "sergiibomko",
 	"public": true,
 	"targets": [

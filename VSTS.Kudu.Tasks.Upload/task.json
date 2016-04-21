@@ -10,7 +10,7 @@
 	"version": {
 		"Major": 0,
 		"Minor": 2,
-		"Patch": 1
+		"Patch": 2
 	},
 	"demands": [ "azureps" ],
 	"minimumAgentVersion": "1.95.0",
@@ -103,7 +103,7 @@
 	],
 	"instanceNameFormat": "Upload: $(WebsiteName)",
 	"execution": {
-		"PowerShell": {
+		"AzurePowerShell": {
 			"target": "$(currentDirectory)\\Upload.ps1",
 			"argumentFormat": "",
 			"workingDirectory": "$(currentDirectory)"
