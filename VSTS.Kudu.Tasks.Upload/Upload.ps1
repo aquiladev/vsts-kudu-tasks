@@ -62,6 +62,8 @@ function Get-SingleFile($files, $pattern)
 	}
 }
 
+$ErrorActionPreference = 'Stop'
+
 [bool]$StopWebsite = [System.Convert]::ToBoolean($StopWebsite)
 
 Write-Verbose "Entering script Upload.ps1"
